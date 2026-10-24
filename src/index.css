@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+:root {
+  --paper: #efe9dc;
+  --ink: #23301f;
+  --accent: #a9512b;
+  --on-accent: #efe9dc;
+  --surface: #e5ded0;
+  --muted: #5f6a59;
+  --line: rgba(35, 48, 31, 0.15);
+  --radius: 8px;
+  --panel-radius: 24px;
+
+  --content: 1180px;
+  --gutter: 20px;
+  --section-y: 72px;
+  --nav-height: 72px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 40px;
+    --section-y: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-y: 110px;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+
+  --radius-card: var(--radius);
+  --radius-panel: var(--panel-radius);
+
+  --font-display: 'Bitter', Georgia, serif;
+  --font-body: 'Karla', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--nav-height);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Centred content column: 1180px of content plus gutters. */
+@utility page {
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Left edge aligned with .page, for layouts that bleed to the right. Needs an inline-size container. */
+@utility page-start {
+  padding-left: max(var(--gutter), calc((100cqw - var(--content)) / 2 + var(--gutter)));
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+@utility meta {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(46px, 6.5vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+@utility heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+}
