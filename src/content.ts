@@ -8,6 +8,8 @@ export interface NavLink {
   href: string;
 }
 
+
+
 /** Public assets under Vite `base` (GitHub Pages: /LongLead/). */
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
